@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link rel="stylesheet" href="Sorting.css">
+        <script src="bubble.js"></script>
+        <script src="insertion.js"></script>
+        <script src="quick.js"></script>
+        <script src="selection.js"></script>
+
+    </head>
+    <body style="background-color: black;">
+        
+            <h1 style="color: azure;position: relative;text-align: center;">Sorting visualiser </h1> <br>
+
+        <nav class="navbar navbar-expand-lg text-white ">
+            <div class="container-fluid">
+    
+                <button id="array" onclick="myFunction()" class=" btn btn-outline-success array">new array </button>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button id="bubble" onclick="bubbleSort()" class="btn btn-outline-primary sorting">bubble sort </button>
+                    <button id="insertion" onclick="insertionSort()" class="btn btn-outline-primary sorting">insertion sort</button>
+                    <button id="selection" onclick="selectionSort()" class="btn btn-outline-primary sorting">selection sort </button>
+                    <button id="quick" onclick="callQuickSort()" class="btn btn-outline-primary sorting">Quick sort </button>  
+                </div>
+            </div>      
+        </nav>
+
+        <div class="center">
+            <span>
+                <label for="arr_size" style="color: azure;position: relative;text-align: center;">No. of Elements</label>
+               <input id="arr_sz" type="range" min="20" max="100" step="1" value="50">
+               <label for="speed" style="color: azure;position: relative;text-align: center;">Speed</label>
+               <input id="speed" type="range" min="-1000" max="0" step="-50" value="-400">
+       </span> <br>
+            <div id="bars" class="flex-container"><div class="flex-child" style="height: 44px;"></div><div class="flex-child" style="height: 54px;"></div><div class="flex-child" style="height: 30px;"></div><div class="flex-child" style="height: 40px;"></div><div class="flex-child" style="height: 39px;"></div><div class="flex-child" style="height: 63px;"></div><div class="flex-child" style="height: 7px;"></div><div class="flex-child" style="height: 94px;"></div><div class="flex-child" style="height: 92px;"></div><div class="flex-child" style="height: 32px;"></div><div class="flex-child" style="height: 69px;"></div><div class="flex-child" style="height: 75px;"></div><div class="flex-child" style="height: 80px;"></div><div class="flex-child" style="height: 79px;"></div><div class="flex-child" style="height: 62px;"></div><div class="flex-child" style="height: 86px;"></div><div class="flex-child" style="height: 24px;"></div><div class="flex-child" style="height: 60px;"></div><div class="flex-child" style="height: 40px;"></div><div class="flex-child" style="height: 50px;"></div><div class="flex-child" style="height: 21px;"></div><div class="flex-child" style="height: 69px;"></div><div class="flex-child" style="height: 14px;"></div><div class="flex-child" style="height: 51px;"></div><div class="flex-child" style="height: 99px;"></div><div class="flex-child" style="height: 99px;"></div><div class="flex-child" style="height: 63px;"></div><div class="flex-child" style="height: 99px;"></div><div class="flex-child" style="height: 25px;"></div><div class="flex-child" style="height: 22px;"></div><div class="flex-child" style="height: 84px;"></div><div class="flex-child" style="height: 32px;"></div><div class="flex-child" style="height: 76px;"></div><div class="flex-child" style="height: 23px;"></div><div class="flex-child" style="height: 39px;"></div><div class="flex-child" style="height: 95px;"></div><div class="flex-child" style="height: 51px;"></div><div class="flex-child" style="height: 10px;"></div><div class="flex-child" style="height: 49px;"></div><div class="flex-child" style="height: 61px;"></div><div class="flex-child" style="height: 48px;"></div><div class="flex-child" style="height: 3px;"></div><div class="flex-child" style="height: 62px;"></div></div>
+        </div>
+
+        <script>
+           var arr_size=document.querySelector("#arr_sz"); 
+           arr_size.addEventListener("input",myFunction);
+           var animation_speed = document.querySelector("#speed");
+           anime_speed = Math.abs(animation_speed.value);
+           animation_speed.addEventListener("input",updateSpeed);
+           function updateSpeed(){
+               let anime_speed =Math.abs(animation_speed.value);
+                console.log(anime_speed);
+           }
+           myFunction();
+            function myFunction() {
+                document.getElementById("bars").innerHTML= '';
+                var no_of_bar=arr_size.value;
+                //console.log(no_of_bar);
+                var array = [];
+                for (let i =0 ;i <no_of_bar;i++){
+                array.push(Math.floor(Math.random() * 100) + 1);
+                }
+                //console.log(array);
+                array.forEach(element => {
+                    var para = document.createElement("div");
+                //para.style.border = "1px solid #ff0000";
+                para.className = "flex-child";
+                para.style.height = element +"px";
+                //para.style.width = "10px";
+                //para.style.padding = "1px";
+                //para.style.margin = "1px";
+                //para.innerText = element;
+
+                document.getElementById("bars").appendChild(para);
+                });
+            }
+            async function callQuickSort(){
+                var x = document.getElementById("bars").querySelectorAll(".flex-child");
+                await quickSort(x,0,arr_size.value-1);
+            }
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    
+</body></html>
